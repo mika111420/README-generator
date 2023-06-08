@@ -1,5 +1,6 @@
 // TODO: Include packages needed for this application
 const inquirer=require("inquirer");
+const fs = require("fs")
 const generateMarkdown = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
 const questions = [
@@ -9,11 +10,11 @@ const questions = [
         message: 'Enter project title: ',
     
     },
-    // {
-    //     type: 'input'
-    //     name: 'description',
-    //     message: 'Enter project description',
-    // }
+    {
+        type: 'input',
+        name: 'description',
+        message: 'Enter project description',
+    },
     {
         type: 'input',
         name: 'installation',
@@ -93,16 +94,15 @@ function generateReadme(data) {
   }
 
 
-function writeToFile(fileName, data) {
-    fs.writeToFile(fileName, data, (error) =>{
-        if(error) {
+  function writeToFile(fileName, data) {
+    fs.writeFile(fileName, data, (error) => {
+        if (error) {
             console.error('Error creating README file:', error);
-        } else{
+        } else {
             console.log('README file has been generated successfully!');
         }
-    })
+    });
 }
-
 // TODO: Create a function to initialize app
 function init() {
     inquirer
